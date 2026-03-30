@@ -7,17 +7,17 @@ Ken's Claude Code skill bundles.
 ### [ken-swe](./ken-swe/README.md)
 Software engineering lifecycle — feature development, bug fixing, PRD writing, code review, frontend design, and polish.
 
-| Skill | Description |
-|-------|-------------|
-| `feature-dev` | Staged feature development: requirements → exploration → architecture → implementation → review |
-| `bug-fix` | Structured bug fixing: reproduce → root cause → fix design → implement → regression check |
-| `write-a-prd` | Write a PRD with embedded design direction |
-| `prd-to-plan` | Break a PRD into phased tracer-bullet vertical slices |
-| `grill-me` | Relentlessly interview a plan until every decision branch is resolved |
-| `code-review` | Parallel multi-angle code review: simplicity, bugs, conventions & security |
-| `frontend-design` | Build distinctive, production-grade frontend interfaces |
-| `simplify` | Simplify and refine recently changed code |
-| `polish` | Final quality pass before shipping |
+| Skill | Phase | Description |
+|-------|-------|-------------|
+| `grill-me` | Planning | Relentlessly interview a plan until every decision branch is resolved |
+| `write-a-prd` | Planning | Write a PRD with embedded design direction |
+| `prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices |
+| `feature-dev` | Implementation | Staged feature development: requirements → exploration → architecture → implementation → review |
+| `frontend-design` | Implementation | Build distinctive, production-grade frontend interfaces |
+| `bug-fix` | Debugging | Structured bug fixing: reproduce → root cause → fix design → implement → regression check |
+| `code-review` | Quality | Parallel multi-angle code review: simplicity, bugs, conventions & security |
+| `simplify` | Quality | Simplify and refine recently changed code |
+| `polish-ui` | Quality | Final quality pass before shipping |
 
 ### [ken-skills](./ken-skills/README.md)
 Skill authoring toolkit — write, review, and improve Claude Code skills.
