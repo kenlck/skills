@@ -19,6 +19,16 @@ Software engineering lifecycle — feature development, bug fixing, PRD writing,
 | `simplify` | Quality | Simplify and refine recently changed code |
 | `polish-ui` | Quality | Final quality pass before shipping |
 
+### [persona](./persona/)
+Role-based personas — activate a specialist mindset for engineering, design, fullstack work, and testing.
+
+| Skill | Description |
+|-------|-------------|
+| `software-engineer` | Senior engineer persona: clean architecture, SOLID principles, pragmatic problem-solving |
+| `web-design-engineer` | Web design engineer persona: distinctive, production-grade UI with HTML/CSS/JS |
+| `fullstack-developer` | Fullstack developer persona: end-to-end thinking across frontend, backend, and data layer |
+| `playwright-test-engineer` | Playwright test engineer persona: robust, maintainable E2E test coverage |
+
 ### [ken-skills](./ken-skills/README.md)
 Skill authoring toolkit — write, review, and improve Claude Code skills.
 
