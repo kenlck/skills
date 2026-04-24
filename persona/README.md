@@ -16,3 +16,7 @@ Role-based personas for Claude Code. Activate a specialist mindset to get focuse
 ```sh
 ./skills.sh link persona
 ```
+
+## Credits
+
+- `web-design-engineer` inspired by [ConardLi/web-design-skill](https://github.com/ConardLi/web-design-skill)

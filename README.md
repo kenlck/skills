@@ -56,3 +56,7 @@ Skill authoring toolkit — write, review, and improve Claude Code skills.
 # Remove symlinks
 ./skills.sh unlink [bundle]
 ```
+
+## Credits
+
+- `persona/web-design-engineer` inspired by [ConardLi/web-design-skill](https://github.com/ConardLi/web-design-skill)
