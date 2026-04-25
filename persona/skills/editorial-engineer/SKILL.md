@@ -104,18 +104,34 @@ Resolve placeholders during this step:
 - `[placeholder: stat]` → find a real stat or cut the sentence.
 - `[placeholder: quote]` → ask the user for a real quote, or cut.
 
-### Step 6: Self-Edit Pass (Anti-AI-Tell Audit + Voice Consistency)
+### Step 6: Self-Edit Pass (Humanization)
 
-Before SEO, do a focused prose-quality pass. Cut and rewrite for:
+Before SEO, do a focused prose-quality pass. This is **non-skippable** — AI-tell-laden prose makes the post unpublishable regardless of accuracy or SEO.
 
-- **AI tells** — full catalogue with replacements in `references/anti-ai-prose.md`
-- **Voice consistency** — every paragraph should sound like the declared voice. If it drifts, rewrite.
-- **Filler paragraphs** — if a paragraph can be deleted without the reader losing anything, delete it.
-- **Limp sentences** — passive without reason, hedging without cause, adverbs padding weak verbs. Tighten.
-- **Rhythm** — vary sentence length.
-- **Claims** — every factual claim is real-and-cited, hedged honestly, or flagged as a placeholder.
+Run the pass in three stages:
 
-Final check: read it aloud. Where you stumble, the prose is wrong.
+**Stage 6a — Pattern audit.** Cut or rewrite every instance of:
+- AI tells from the catalogue in `references/anti-ai-prose.md` (significance inflation, copula avoidance, superficial -ing analyses, vague attributions, false ranges, synonym cycling, negative parallelisms, rule-of-three forcing, em-dash overuse, inline-header lists, knowledge-cutoff hedging, generic positive conclusions, etc.)
+- Voice drift — every paragraph should sound like the declared voice. If it drifts, rewrite.
+- Filler paragraphs — if a paragraph can be deleted without the reader losing anything, delete it.
+- Limp sentences — passive without reason, hedging without cause, adverbs padding weak verbs.
+- Unverified claims — must be real-and-cited, hedged honestly, or flagged as a placeholder.
+
+**Stage 6b — Soul check.** Clean prose is not the same as human prose. Sterile, voiceless writing is just as obviously AI as slop is. Audit for:
+- **Opinion**: does the writer have a take, or just neutrally report? A senior writer reacts.
+- **Rhythm**: do sentences vary in length? Five sentences in a row at ~20 words = robotic. Break some to 6, stretch some to 30.
+- **Specificity over abstraction**: "there's something unsettling about agents churning at 3am" beats "this is concerning".
+- **Mess**: tangents, asides, half-formed thoughts are human. Perfect structure feels algorithmic.
+- **First-person where it fits**: "I keep coming back to…" or "Here's what gets me…" signals a real person thinking. Use it where the brand voice allows.
+- **Acknowledged complexity**: "this is impressive but kind of unsettling" beats "this is impressive".
+
+See `references/anti-ai-prose.md` → **Personality and Soul** for full guidance and examples.
+
+**Stage 6c — Two-pass audit loop.** After Stages 6a and 6b, ask yourself the explicit question: **"What makes this draft so obviously AI-generated?"** Answer briefly with the remaining tells (rhythm too clean, contrasts too tidy, names that read placeholder-ish, closing that's slogan-y, etc.). Then revise to fix them.
+
+This loop is what humanizes. Skipping it leaves a "clean but soulless" draft — technically free of catalogued tells, still obviously AI.
+
+Final check: read the post aloud. Where you stumble, the prose is wrong. Where you skim, the paragraph is filler. Where you nod, the sentence works.
 
 ### Step 7: SEO Pass
 
@@ -150,6 +166,8 @@ Save to the project's blog directory (location detection + frontmatter conventio
 **4. Never over-assert clinical, medical, legal, or financial claims.** Hedge honestly when the claim is probabilistic. Do not promise cures, guaranteed outcomes, or compliance.
 
 **5. Always gather editorial context before drafting** — even on auto-trigger. Step 2 is not optional.
+
+**6. Always run the full Stage 6 humanization pass before SEO.** No draft ships AI-shaped. The two-pass audit loop ("what makes this obviously AI?" → revise) is mandatory, even when prose looks clean.
 
 ---
 
@@ -200,7 +218,17 @@ Complete all items before telling the user the post is ready:
 - [ ] All claims are real-and-cited, hedged honestly, or flagged as placeholders
 - [ ] No fabricated stats, quotes, studies, customers, or patient stories
 - [ ] Voice is consistent with the declared editorial system across every paragraph
-- [ ] No AI prose tells survive the draft
+- [ ] No AI prose tells survive the draft (full catalogue audited)
+- [ ] Two-pass humanization audit completed — explicit "what makes this AI?" question asked and answered, draft revised
+- [ ] Soul check passed — opinions present, rhythm varied, specificity over abstraction, complexity acknowledged where honest
+- [ ] No copula avoidance ("serves as", "stands as", "functions as") where "is"/"has" works
+- [ ] No significance inflation ("testament", "pivotal moment", "evolving landscape", "vital role")
+- [ ] No superficial -ing endings ("highlighting", "underscoring", "reflecting") tacked on for fake depth
+- [ ] No false ranges ("from X to Y" where X and Y aren't on a real scale)
+- [ ] No synonym cycling — same noun repeated naturally beats forced variation
+- [ ] No emojis in headings or bullets, no curly quotes, no title-case headings (sentence case only)
+- [ ] No knowledge-cutoff disclaimers ("based on available information", "while details are limited")
+- [ ] No generic positive conclusions ("the future looks bright", "exciting times ahead")
 - [ ] Length within ±15% of target; no filler sections; no redundant Introduction/Conclusion H2s
 - [ ] Title: 50–60 chars, primary keyword near front, compelling
 - [ ] Excerpt / meta: 140–160 chars, primary keyword natural
