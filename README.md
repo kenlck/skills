@@ -28,6 +28,8 @@ Role-based personas — activate a specialist mindset for engineering, design, f
 | `web-design-engineer` | Web design engineer persona: distinctive, production-grade UI with HTML/CSS/JS |
 | `fullstack-developer` | Fullstack developer persona: end-to-end thinking across frontend, backend, and data layer |
 | `playwright-test-engineer` | Playwright test engineer persona: robust, maintainable E2E test coverage |
+| `editorial-engineer` | Senior content engineer persona: plan, research, write, and edit blog posts end-to-end |
+| `seo-engineer` | Senior SEO engineer persona: technical SEO, on-page, content strategy, GEO/AEO, and agent-readiness |
 
 ### [ken-skills](./ken-skills/README.md)
 Skill authoring toolkit — write, review, and improve Claude Code skills.

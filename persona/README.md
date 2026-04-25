@@ -10,6 +10,8 @@ Role-based personas for Claude Code. Activate a specialist mindset to get focuse
 | `web-design-engineer` | `/persona:web-design-engineer` | Web design engineer persona: distinctive, production-grade UI with HTML/CSS/JS |
 | `fullstack-developer` | `/persona:fullstack-developer` | Fullstack developer persona: end-to-end thinking across frontend, backend, and data layer |
 | `playwright-test-engineer` | `/persona:playwright-test-engineer` | Playwright test engineer persona: robust, maintainable E2E test coverage |
+| `editorial-engineer` | `/persona:editorial-engineer` | Senior content engineer persona: plan, research, write, and edit blog posts end-to-end |
+| `seo-engineer` | `/persona:seo-engineer` | Senior SEO engineer persona: technical SEO, on-page, content strategy, GEO/AEO, and agent-readiness |
 
 ## Install
 
