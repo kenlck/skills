@@ -40,6 +40,12 @@ Skill authoring toolkit — write, review, and improve Claude Code skills.
 | `review-skill` | Audit a skill against guidelines and produce a structured report |
 | `enhance-skill` | Review a skill and apply improvements to structure and content quality |
 
+## Installation
+
+```sh
+npx skills add kenlck/skills
+```
+
 ## Usage
 
 ```sh
