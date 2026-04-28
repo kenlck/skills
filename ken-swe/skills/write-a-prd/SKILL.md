@@ -1,6 +1,6 @@
 ---
 name: write-a-prd
-description: Create a PRD with an embedded Design Direction section through user interview, codebase exploration, and design intent capture. Use when building or revamping any feature with frontend or UI work — landing pages, components, UI redesigns — where design intent needs to be locked in before implementation. Extends write-a-prd with structured design thinking: audience, tone, aesthetic direction, and the one memorable differentiator.
+description: "Create a PRD with an embedded Design Direction section through user interview, codebase exploration, and design intent capture. Use when building or revamping any feature with frontend or UI work — landing pages, components, UI redesigns — where design intent needs to be locked in before implementation. Extends write-a-prd with structured design thinking: audience, tone, aesthetic direction, and the one memorable differentiator."
 disable-model-invocation: true
 ---
 
