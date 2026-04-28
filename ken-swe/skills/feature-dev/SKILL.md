@@ -18,7 +18,10 @@ Claude will ask your questioning mode (Quick / Normal / Grill Me) and whether to
 
 - **Understand before acting** — read existing patterns before designing anything
 - **Design-quality frontend** — any UI work gets full aesthetic intention; see [FRONTEND.md](FRONTEND.md)
-- **Simple and elegant** — readable, maintainable, architecturally sound
+- **Simple and elegant** — readable, maintainable, architecturally sound. Minimum code that solves the problem; nothing speculative. No features beyond what was asked, no abstractions for single-use code, no error handling for impossible scenarios. If you wrote 200 lines and it could be 50, rewrite.
+- **Surgical changes** — touch only what the task requires. Don't "improve" adjacent code, comments, or formatting. Match existing style even if you'd do it differently. Remove imports/variables your changes orphan; don't delete pre-existing dead code unless asked. Every changed line should trace directly to the request.
+- **Surface assumptions, don't hide them** — if multiple plausible interpretations exist with materially different implementations, present them; don't pick silently. If something is unclear, name what's confusing and ask. Hidden confusion turns into rework.
+- **Goal-driven execution** — transform tasks into verifiable goals before coding. "Add validation" → "tests for invalid inputs, then make them pass". "Fix the bug" → "test that reproduces it, then make it pass". Strong success criteria let you loop independently; weak ones ("make it work") force constant clarification.
 - **Track everything** — use TodoWrite to track all stages and progress
 - **Log decisions** — when Log Mode is on, record decisions to `plans/` per [LOG.md](LOG.md)
 
@@ -76,8 +79,9 @@ In all modes: if a question can be answered by reading the codebase, answer it y
 
 1. Wait for approval on the chosen architecture.
 2. Read all relevant files identified in previous stages.
-3. Implement following the chosen architecture and codebase conventions. Update todos as you go.
-4. **Frontend work**: If the feature includes meaningful UI — pages, components, layouts, forms, visual changes — follow [FRONTEND.md](FRONTEND.md). Ask the user whether to use `frontend-design` or proceed inline. If Log Mode is on, record design decisions to the log.
+3. Break the work into sub-tasks, each phrased as a verifiable goal (failing test, type check, observable behavior). Loop on each: write the verification, make it pass, move on. Don't ask for check-ins between green sub-tasks.
+4. Implement following the chosen architecture and codebase conventions. Keep changes surgical — every edited line traces to the task. Update todos as you go.
+5. **Frontend work**: If the feature includes meaningful UI — pages, components, layouts, forms, visual changes — follow [FRONTEND.md](FRONTEND.md). Ask the user whether to use `frontend-design` or proceed inline. If Log Mode is on, record design decisions to the log.
 
 ## Stage 5: Code Quality
 

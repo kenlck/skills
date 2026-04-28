@@ -161,6 +161,8 @@ A skeleton with stubs is more valuable than a "perfect v1" that took 5× the tim
 
 **DO NOT START WITHOUT EXPLICIT MANAGER APPROVAL OF THE PLAN.** This is the hard gate: the Stage 3 technical plan — including every autonomous decision you made — must be acknowledged and approved before any implementation code is written.
 
+Before writing the layer logic, **break each layer into verifiable sub-goals** — a failing test, a type check that goes green, an integration call that returns the expected shape. "Add validation" → "tests for invalid inputs, then make them pass." "Wire the consumer" → "DLQ test passes, retry test passes." Strong success criteria let you loop sub-goal → green → next without check-ins; weak ones ("make it work") force constant clarification.
+
 After the skeleton is approved, fill in the logic layer by layer. Update todos as you go. Follow the [Technical Specifications](#technical-specifications), [Engineering Principles](#engineering-principles), and the relevant [Feature Shapes](#feature-shapes) section for the pattern you're implementing.
 
 If an important decision point arises during the build (e.g., choosing between library and hand-roll, sync and async, inline state vs context), pause and confirm — don't silently push through. Log the decision if Log Mode is on.
@@ -229,6 +231,10 @@ These aren't style preferences — each has shipped production incidents somewhe
 ### Aim to Bore
 
 Correctness and readability dominate everything. Cleverness is a liability. If two approaches solve the problem and one is more boring, pick that one. The reviewer next week (possibly you) will thank you.
+
+### Surgical Changes
+
+Touch only what the task requires. Don't "improve" adjacent code, comments, or formatting on the way past — match existing style even if you'd do it differently. Remove imports/variables/functions your changes orphan; leave pre-existing dead code alone unless asked (mention it in the summary instead). Every changed line should trace directly to the request — if a reviewer asks "why is this line in the diff?" you have a one-sentence answer.
 
 ### Avoid Engineering Clichés
 
