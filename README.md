@@ -9,7 +9,9 @@ Software engineering lifecycle — feature development, bug fixing, PRD writing,
 
 | Skill | Phase | Description |
 |-------|-------|-------------|
+| `karpathy-guidelines` | Foundation | Behavioral guardrails: surface assumptions, simplicity first, surgical changes, goal-driven execution |
 | `grill-me` | Planning | Relentlessly interview a plan until every decision branch is resolved |
+| `grill-with-docs` | Planning | Grill a plan against existing CONTEXT.md / ADRs; sharpen terminology and update docs inline |
 | `write-a-prd` | Planning | Write a PRD with embedded design direction |
 | `prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices |
 | `feature-dev` | Implementation | Staged feature development: requirements → exploration → architecture → implementation → review |
@@ -68,3 +70,5 @@ npx skills add kenlck/skills
 ## Credits
 
 - `persona/web-design-engineer` inspired by [ConardLi/web-design-skill](https://github.com/ConardLi/web-design-skill)
+- `ken-swe/karpathy-guidelines` sourced from [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) (MIT)
+- `ken-swe/grill-with-docs` sourced from [mattpocock/skills](https://github.com/mattpocock/skills)
