@@ -59,6 +59,8 @@ In all modes: if a question can be answered by reading the codebase, answer it y
 
 ## Stage 2: Codebase Exploration & Clarification
 
+**Codemap first.** Before using Glob/Grep/Read, check if `.codemap/MAP.md` exists in the target repo. If yes, read it and use `.codemap/graph.json` for targeted symbol/edge lookups. Fall back to Glob/Grep/Read only for details the map doesn't cover. If the repo is TS/JS and the map is missing or stale, suggest `/ken-swe:codemap` (build or update) before continuing.
+
 1. Launch 2–3 general-purpose agents in parallel using Explorer prompts from [AGENTS.md](AGENTS.md).
 2. Read all key files the agents identify.
 3. Present findings: patterns discovered, abstractions to reuse, conventions to follow.

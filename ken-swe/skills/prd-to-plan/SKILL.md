@@ -16,7 +16,7 @@ The PRD should already be in the conversation. If it isn't, ask the user to past
 
 ### 2. Explore the codebase
 
-If you have not already explored the codebase, do so to understand the current architecture, existing patterns, and integration layers.
+If you have not already explored the codebase, do so to understand the current architecture, existing patterns, and integration layers. Reference `.codemap/MAP.md` (if present) for module boundaries when defining tracer-bullet slices — vertical slices should respect the existing module structure where possible.
 
 ### 3. Identify durable architectural decisions
 

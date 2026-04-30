@@ -25,6 +25,10 @@ Determine what to review:
 
 Read all files in scope. Understand the surrounding context — don't review lines in isolation.
 
+### Step 1.5: Blast-radius check (if codemap exists)
+
+If `.codemap/graph.json` exists, walk the `calls`/`imports` edges from each changed symbol to compute its transitive callers. Note the surface that could be affected and weight review depth accordingly — a leaf utility with no callers needs less scrutiny than a hub function with dozens.
+
 ### Step 2: Understand conventions
 
 Before flagging anything, understand the project's standards:
