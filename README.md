@@ -10,7 +10,8 @@ Software engineering lifecycle — feature development, bug fixing, PRD writing,
 | Skill | Phase | Description |
 |-------|-------|-------------|
 | `karpathy-guidelines` | Foundation | Behavioral guardrails: surface assumptions, simplicity first, surgical changes, goal-driven execution |
-| `codemap` | Foundation | Build a persistent `.codemap/` index (graph.json + MAP.md) so feature-dev/bug-fix/code-review explore via the map |
+| `ts-codemap` | Foundation | Build a persistent `.codemap/` index for TS/JS repos via ts-morph (path aliases, re-exports, JSX) |
+| `codemap` | Foundation | Build a persistent `.codemap/` index for Java/Go/Python/Rust repos via tree-sitter (same schema as ts-codemap) |
 | `grill-me` | Planning | Relentlessly interview a plan until every decision branch is resolved |
 | `grill-with-docs` | Planning | Grill a plan against existing CONTEXT.md / ADRs; sharpen terminology and update docs inline |
 | `write-a-prd` | Planning | Write a PRD with embedded design direction |

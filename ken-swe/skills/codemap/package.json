@@ -2,13 +2,14 @@
   "name": "@ken-swe/codemap",
   "version": "1.0.0",
   "private": true,
-  "description": "Build and maintain a structural map of a TypeScript/JavaScript codebase under .codemap/",
+  "description": "Build and maintain a structural map of a Java/Go/Python/Rust codebase under .codemap/ (tree-sitter)",
   "scripts": {
     "build": "tsx scripts/build.ts",
     "update": "tsx scripts/update.ts"
   },
   "dependencies": {
-    "ts-morph": "^24.0.0",
-    "tsx": "^4.19.2"
+    "tree-sitter-wasms": "0.1.13",
+    "tsx": "^4.19.2",
+    "web-tree-sitter": "0.22.6"
   }
 }

@@ -7,7 +7,8 @@ Ken's software engineering skill suite. Covers the full development lifecycle â€
 | Skill | Invoke | Phase | Description |
 |-------|--------|-------|-------------|
 | `karpathy-guidelines` | `/ken-swe:karpathy-guidelines` | Foundation | Behavioral guardrails for any coding task: surface assumptions, simplicity first, surgical changes, goal-driven execution |
-| `codemap` | `/ken-swe:codemap` | Foundation | Build a persistent `.codemap/` index (graph.json + MAP.md) so feature-dev/bug-fix/code-review explore via the map instead of grep + read |
+| `ts-codemap` | `/ken-swe:ts-codemap` | Foundation | Build a persistent `.codemap/` index for TS/JS repos via ts-morph: path aliases, re-export flattening, JSX |
+| `codemap` | `/ken-swe:codemap` | Foundation | Build a persistent `.codemap/` index for Java/Go/Python/Rust repos via tree-sitter; same schema as ts-codemap |
 | `grill-me` | `/ken-swe:grill-me` | Planning | Relentlessly interview a plan or design until every decision branch is resolved |
 | `grill-with-docs` | `/ken-swe:grill-with-docs` | Planning | Grill a plan against the project's CONTEXT.md and ADRs; sharpen terminology, update docs inline |
 | `write-a-prd` | `/ken-swe:write-a-prd` | Planning | Write a PRD with embedded design direction through codebase exploration and user interview |
