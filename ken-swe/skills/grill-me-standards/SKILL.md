@@ -17,19 +17,22 @@ Write inline as decisions are made. Do not batch — capture each standard the m
 ## Workflow
 
 1. **Confirm target file** — `CLAUDE.md` (default) or `CODING_STANDARDS.md`.
-2. **Scan the codebase** — get a feel for languages, frameworks, test setup, file layout. Note signals you will use to pre-fill answers.
-3. **Walk the checklist below** — for each topic with codebase signal:
+2. **Warm-up** — ask: "Before we dive in, anything you specifically want to make sure we capture?" Note any topics raised; cover them with extra care when the checklist reaches them, or in the open discussion round if off-checklist.
+3. **Scan the codebase** — get a feel for languages, frameworks, test setup, file layout. Note signals you will use to pre-fill answers.
+4. **Walk the checklist below** — for each topic with codebase signal:
    - State what you observed (with file paths as evidence).
    - Propose the standard.
    - Ask the user to confirm, refine, or override.
    - Write the confirmed standard to the target file before moving on.
-4. **Open discussion round** — once the checklist is done, ask: "Anything else you want captured — team conventions, gotchas, things you keep correcting in PRs?" Keep grilling on whatever they raise until exhausted.
-5. **Final review** — show the resulting document and ask for last edits.
+5. **Open discussion round** — once the checklist is done, ask: "Anything else you want captured — team conventions, gotchas, things you keep correcting in PRs?" Keep grilling on whatever they raise until exhausted.
+6. **Final review** — show the resulting document and ask for last edits.
 
 ## Checklist
 
-Skip any item where the codebase gives no signal.
+Skip any item where the codebase gives no signal. Domain glossary and ADRs are out of scope — those belong to the `grill-with-docs` skill.
 
+- **Project overview** — one to three lines: what this repo is, the key top-level directories
+- **Common commands** — dev server, test, lint, typecheck, build, format
 - **Languages & runtimes** — versions, package manager, lockfile policy
 - **File & directory layout** — where new modules go, colocation rules
 - **Naming** — files, components, functions, variables, constants, test files
@@ -37,12 +40,20 @@ Skip any item where the codebase gives no signal.
 - **Types** — strictness, `any` policy, inference vs explicit annotations
 - **Error handling** — throw vs result types, where errors are caught, logging
 - **Async patterns** — promises vs async/await, cancellation, concurrency limits
+- **Data layer** — schema/models location, query patterns, migration workflow
+- **API conventions** — request/response shape, validation at boundaries, route layout
 - **State management** — for frontend: store choice, where state lives
 - **Styling** — for frontend: CSS approach, design tokens, component library
+- **Accessibility** — for frontend: semantic HTML, keyboard nav, ARIA expectations
+- **Performance** — caching, memoization, query batching, bundle/perf budgets
+- **Security & secrets** — secrets handling, input validation, auth patterns, what never gets logged
+- **Configuration & environment** — `.env` layout, env var naming, config loading
 - **Testing** — framework, file location, naming, what's required vs optional
 - **Comments & docs** — when to comment, JSDoc/docstring policy
 - **Logging & observability** — logger, levels, structured fields
 - **Dependencies** — adding a new dep, version pinning, audit policy
+- **Refactor & cleanup policy** — when to refactor, rules on touching adjacent code, dead-code policy
+- **Forbidden / restricted areas** — paths that need explicit approval before editing (e.g. `infra/`, `.github/workflows/`, generated files)
 - **Git & PR** — branch naming, commit style, PR size, review expectations
 - **Build & CI** — required checks, formatter, linter
 
