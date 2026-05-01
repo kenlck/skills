@@ -51,6 +51,8 @@ In all modes: if a question can be answered by reading the codebase or error out
 
 ## Stage 2: Root Cause Analysis
 
+**Codemap first.** If `.codemap/MAP.md` exists, read it before grepping. Use `.codemap/graph.json` edges to trace callers/callees of the suspect symbol (`type: "calls"`, `type: "imports"`) instead of grepping for usages. Fall back to Glob/Grep/Read for details the map doesn't cover. If the map is missing or stale, suggest the right builder: `/ken-swe:ts-codemap` for TS/JS, `/ken-swe:codemap` for Java/Go/Python/Rust.
+
 1. Launch 2–3 general-purpose agents in parallel using Tracer prompts from [AGENTS.md](AGENTS.md).
 2. Read all files the agents identify.
 3. Present findings: confirmed root cause, exact failure point, all code paths affected.

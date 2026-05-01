@@ -1,0 +1,14 @@
+{
+  "name": "@ken-swe/ts-codemap",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build and maintain a structural map of a TypeScript/JavaScript codebase under .codemap/",
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "update": "tsx scripts/update.ts"
+  },
+  "dependencies": {
+    "ts-morph": "^24.0.0",
+    "tsx": "^4.19.2"
+  }
+}
