@@ -1,6 +1,14 @@
-# Agent Prompts Reference
+# Agent Prompts Reference (Fallback)
 
-Used by `software-engineer` to launch general-purpose subagents via the Agent tool at Stages 2 (codebase exploration), 3 (architecture design), and 6 (code review). Customize each prompt with the actual feature name and context before launching.
+**Use this file when the preferred ecosystem tooling is unavailable.**
+
+The `software-engineer` skill prefers, in order:
+
+1. **Stage 2 (exploration)** — `feature-dev:code-explorer` agent from the `feature-dev` plugin
+2. **Stage 3 (architecture)** — `feature-dev:code-architect` agent
+3. **Stage 6 (review)** — `/simplify` skill then `/code-review` skill; or `feature-dev:code-reviewer` agent
+
+If none of those are available in the current environment, fall back to the prompts below launched via the generic `Agent` tool (subagent_type `general-purpose`). Customize each prompt with the actual feature name and context before launching.
 
 Pattern: launch 2–3 in parallel for Explorer and Architect; all 3 in parallel for Reviewer.
 
