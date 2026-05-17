@@ -19,6 +19,7 @@ Ken's software engineering skill suite. Covers the full development lifecycle �
 | `bug-fix` | `/ken-swe:bug-fix` | Debugging | Structured bug fixing: reproduce → root cause → fix design → implement → regression check |
 | `diagnose` | `/ken-swe:diagnose` | Debugging | Disciplined diagnosis loop for hard bugs and performance regressions: feedback loop → reproduce → hypothesise → instrument → fix → regression test |
 | `code-review` | `/ken-swe:code-review` | Quality | Parallel multi-angle code review: simplicity, bugs, conventions & security |
+| `code-review-parallel` | `/ken-swe:code-review-parallel` | Quality | Review multiple PRs/MRs in parallel across GitHub, GitLab, Azure DevOps; consolidated report, optional PR comments |
 | `simplify` | `/ken-swe:simplify` | Quality | Simplify and refine recently changed code for clarity and maintainability |
 | `polish-ui` | `/ken-swe:polish-ui` | Quality | Final quality pass: alignment, spacing, interaction states, copy, edge cases |
 
