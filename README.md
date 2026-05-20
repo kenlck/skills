@@ -14,17 +14,21 @@ Software engineering lifecycle — feature development, bug fixing, PRD writing,
 | `codemap` | Foundation | Build a persistent `.codemap/` index for Java/Go/Python/Rust repos via tree-sitter (same schema as ts-codemap) |
 | `grill-me` | Planning | Relentlessly interview a plan until every decision branch is resolved |
 | `grill-with-docs` | Planning | Grill a plan against existing CONTEXT.md / ADRs; sharpen terminology and update docs inline |
+| `grill-me-standards` | Planning | Interview to extract coding standards from an existing codebase into a CLAUDE.md / CODING_STANDARDS.md |
 | `write-a-prd` | Planning | Write a PRD with embedded design direction |
 | `prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices |
 | `feature-dev` | Implementation | Staged feature development: requirements → exploration → architecture → implementation → review |
+| `feature-dev-next` | Implementation | Right-sized feature development with three presets (Quick / Standard / Deep) |
 | `feature-dev-auto` | Implementation | Autonomous feature development with goal-loop verification: front-load decisions, then implement unattended until goals verify or an escalation triggers |
 | `frontend-design` | Implementation | Build distinctive, production-grade frontend interfaces |
 | `bug-fix` | Debugging | Structured bug fixing: reproduce → root cause → fix design → implement → regression check |
+| `diagnose` | Debugging | Disciplined diagnosis loop for hard bugs and performance regressions |
 | `code-review` | Quality | Parallel multi-angle code review: simplicity, bugs, conventions & security |
+| `code-review-parallel` | Quality | Review multiple PRs/MRs in parallel across GitHub, GitLab, Azure DevOps |
 | `simplify` | Quality | Simplify and refine recently changed code |
 | `polish-ui` | Quality | Final quality pass before shipping |
 
-### [persona](./persona/)
+### [persona](./persona/README.md)
 Role-based personas — activate a specialist mindset for engineering, design, fullstack work, and testing.
 
 | Skill | Description |
