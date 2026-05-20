@@ -15,6 +15,7 @@ Ken's software engineering skill suite. Covers the full development lifecycle �
 | `prd-to-plan` | `/ken-swe:prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices, saved as a plan file |
 | `feature-dev` | `/ken-swe:feature-dev` | Implementation | Staged feature development: requirements → codebase exploration → architecture → implementation → review |
 | `feature-dev-next` | `/ken-swe:feature-dev-next` | Implementation | Right-sized feature development with three presets (Quick / Standard / Deep). Testbed for the next iteration of `feature-dev` |
+| `feature-dev-auto` | `/ken-swe:feature-dev-auto` | Implementation | Autonomous feature development (Standard / Deep): front-loads decisions interactively, then drives a goal-loop unattended until goals verify or an escalation triggers |
 | `frontend-design` | `/ken-swe:frontend-design` | Implementation | Build distinctive, production-grade frontend interfaces with high aesthetic intention |
 | `bug-fix` | `/ken-swe:bug-fix` | Debugging | Structured bug fixing: reproduce → root cause → fix design → implement → regression check |
 | `diagnose` | `/ken-swe:diagnose` | Debugging | Disciplined diagnosis loop for hard bugs and performance regressions: feedback loop → reproduce → hypothesise → instrument → fix → regression test |

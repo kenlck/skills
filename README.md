@@ -17,6 +17,7 @@ Software engineering lifecycle — feature development, bug fixing, PRD writing,
 | `write-a-prd` | Planning | Write a PRD with embedded design direction |
 | `prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices |
 | `feature-dev` | Implementation | Staged feature development: requirements → exploration → architecture → implementation → review |
+| `feature-dev-auto` | Implementation | Autonomous feature development with goal-loop verification: front-load decisions, then implement unattended until goals verify or an escalation triggers |
 | `frontend-design` | Implementation | Build distinctive, production-grade frontend interfaces |
 | `bug-fix` | Debugging | Structured bug fixing: reproduce → root cause → fix design → implement → regression check |
 | `code-review` | Quality | Parallel multi-angle code review: simplicity, bugs, conventions & security |
