@@ -92,6 +92,8 @@ Every Stage 3 proposal — across all presets — **must list 3–5 verifiable g
 
 **Deep** — Launch **3** Architect agents in parallel (minimal / clean / pragmatic). Same recommendation + side-by-side presentation + AskUserQuestion. **Do not start Stage 4 without explicit approval.**
 
+**Adjust loop (all presets)** — if the user picks *adjust* or otherwise asks for changes, treat it as a request to revise, **not** as approval to build. Revise the plan, then re-present the full updated plan (design + the 3–5 verifiable goals) and ask again via AskUserQuestion (proceed / adjust / abort). Repeat until the user **explicitly** approves. Stating *what* to change is never permission to start implementing — only an explicit "proceed" advances to Stage 4.
+
 If log mode is on, record the architecture decision and verifiable goals to the log.
 
 ## Stage 4: Implementation
