@@ -1,6 +1,6 @@
 # Frontend Design Reference
 
-Used by `feature-dev` during Stage 4 when the feature includes meaningful UI work.
+Used by `feature-dev-next` during Stage 4 when the feature includes meaningful UI work.
 
 ---
 

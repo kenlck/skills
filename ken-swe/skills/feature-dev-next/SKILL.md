@@ -26,6 +26,8 @@ You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-lo
 
 \*Standard auto-flips to **on** if `plans/technical-decisions.md` or `plans/design-decisions.md` already exists for this feature area.
 
+**Stage 0 (Setup)** and **Stage 6 (Summary)** always run for every preset — only Stages 1–5 vary by the table above.
+
 ## Core Principles
 
 - **Understand before acting** — read existing patterns before designing.
@@ -40,7 +42,7 @@ You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-lo
 ## Stage 0: Setup
 
 1. Read `$ARGUMENTS`. Parse `--log` / `--no-log` flag if present.
-2. **If `$ARGUMENTS` is empty (after stripping flags)** — scan `plans/` for an existing implementation plan (e.g. `car-fleet-plan.md`). If found:
+2. **If `$ARGUMENTS` is empty (after stripping flags)** — scan `plans/` for an existing implementation plan (e.g. `<feature>-plan.md`). If found:
    - Read it; identify pending stages (not marked ✅ Done).
    - Ask via AskUserQuestion: work on the **next pending stage** (recommended) or **pick a specific stage**.
    - Use the chosen stage as feature scope; skip to its workflow point.
@@ -49,7 +51,7 @@ You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-lo
 4. Ask **one** AskUserQuestion: which preset (Quick / Standard / Deep)?
 5. Apply preset defaults:
    - **Log mode**: derived per preset table. `--log` / `--no-log` overrides.
-   - **Memory check** (Standard/Deep only): the auto-loaded `MEMORY.md` is already in context — review it for prior work in this area. On Deep, if `claude-mem:mem-search` is in the available skills, also run it for richer cross-session lookup.
+   - **Memory check** (Standard/Deep only): if a `MEMORY.md` was auto-loaded into context, review it for prior work in this area (skip silently if absent). On Deep, if `claude-mem:mem-search` is in the available skills, also run it for richer cross-session lookup.
 6. Create a todo list scaled to the preset (skip stages the preset omits).
 
 ## Stage 1: Discovery & Requirements
@@ -63,7 +65,7 @@ You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-lo
 In all presets:
 - If a question can be answered by reading the codebase, answer it yourself.
 - If a prior log was found in Stage 0, briefly present already-resolved decisions and confirm they still stand. Skip re-asking.
-- After interrogation, summarise confirmed decisions and get explicit sign-off.
+- After interrogation, summarise confirmed decisions and get explicit sign-off. If the user requests changes, revise the summary and re-confirm before advancing — a change request is not sign-off.
 - If log mode is on, write or update the log per [LOG.md](LOG.md).
 
 ## Stage 2: Codebase Exploration
@@ -92,7 +94,10 @@ Every Stage 3 proposal — across all presets — **must list 3–5 verifiable g
 
 **Deep** — Launch **3** Architect agents in parallel (minimal / clean / pragmatic). Same recommendation + side-by-side presentation + AskUserQuestion. **Do not start Stage 4 without explicit approval.**
 
-**Adjust loop (all presets)** — if the user picks *adjust* or otherwise asks for changes, treat it as a request to revise, **not** as approval to build. Revise the plan, then re-present the full updated plan (design + the 3–5 verifiable goals) and ask again via AskUserQuestion (proceed / adjust / abort). Repeat until the user **explicitly** approves. Stating *what* to change is never permission to start implementing — only an explicit "proceed" advances to Stage 4.
+**Approval gate (all presets)** — resolve the AskUserQuestion outcome before doing anything else:
+- *proceed* — the only outcome that advances to Stage 4.
+- *adjust* (or any request for changes) — treat it as a request to revise, **not** as approval to build. Revise the plan, then re-present the full updated plan (design + the 3–5 verifiable goals) and ask again (proceed / adjust / abort). Repeat until the user **explicitly** approves. Stating *what* to change is never permission to start implementing.
+- *abort* — stop here. Do not implement. Offer to return to Stage 1 (rework requirements) or end the workflow.
 
 If log mode is on, record the architecture decision and verifiable goals to the log.
 
@@ -104,7 +109,7 @@ If log mode is on, record the architecture decision and verifiable goals to the 
 2. Read all relevant files identified in previous stages.
 3. Break work into sub-tasks. Each sub-task is a verifiable goal from Stage 3 (failing test, type check, observable behaviour). Loop on each: write the verification, make it pass, move on. Don't ask for check-ins between green sub-tasks.
 4. Implement following the chosen architecture and codebase conventions. Keep changes surgical — every edited line traces to the task. Update todos as you go.
-5. **Frontend work** — if the feature includes meaningful UI (pages, components, layouts, forms, visual changes), follow [FRONTEND.md](FRONTEND.md). Ask the user whether to invoke `frontend-design` or proceed inline. If log mode is on, record design decisions to the log.
+5. **Frontend work** — if the feature includes meaningful UI (pages, components, layouts, forms, visual changes), follow [FRONTEND.md](FRONTEND.md). If the `frontend-design` handoff was already offered in an earlier stage, honour that choice and do not re-ask — only re-offer if new UI scope has appeared since. Otherwise ask once whether to invoke `frontend-design` or proceed inline. If log mode is on, record design decisions to the log.
 6. **TDD on Deep (optional)** — at the start of Stage 4, ask once: "Use `/tdd` for full red-green-refactor on this implementation? (Recommended for risky/algorithmic work)". If yes, hand off; otherwise inline TDD-lite continues.
 7. **If a stubborn bug surfaces mid-implementation** — hand off to `/ken-swe:diagnose` rather than trying to debug inline. The diagnose skill enforces a feedback-loop discipline that catches bugs faster than ad-hoc inspection.
 
