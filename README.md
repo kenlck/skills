@@ -43,6 +43,7 @@ Skill authoring toolkit — write, review, and improve Claude Code skills.
 | `write-a-skill` | Scaffold a new skill through requirements gathering and iterative drafting |
 | `review-skill` | Audit a skill against guidelines and produce a structured report |
 | `enhance-skill` | Review a skill and apply improvements to structure and content quality |
+| `session-to-skill` | Capture the workflow of the current session and distill it into a reusable skill |
 
 ## Installation
 
@@ -74,3 +75,4 @@ npx skills add kenlck/skills
 - `persona/web-design-engineer` inspired by [ConardLi/web-design-skill](https://github.com/ConardLi/web-design-skill)
 - `ken-swe/karpathy-guidelines` sourced from [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) (MIT)
 - `ken-swe/grill-with-docs` sourced from [mattpocock/skills](https://github.com/mattpocock/skills)
+- `ken-skills/session-to-skill` inspired by the `handoff` skill from [mattpocock/skills](https://github.com/mattpocock/skills)
