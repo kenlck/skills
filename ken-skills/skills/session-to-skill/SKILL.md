@@ -8,9 +8,9 @@ disable-model-invocation: true
 
 Distill the workflow of the current session into a durable, reusable skill.
 
-Unlike a handoff (a one-time summary for the next agent), this captures the
-*repeatable procedure* — the steps, commands, decisions, and pitfalls — and
-writes it out as a proper skill that can run the same workflow again later.
+Capture the *repeatable procedure* — the steps, commands, decisions, and
+pitfalls — and write it out as a proper skill that can run the same workflow
+again later.
 
 ## Quick start
 
