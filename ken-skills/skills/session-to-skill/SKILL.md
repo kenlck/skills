@@ -42,6 +42,17 @@ branch names) with parameters or placeholders. Redact secrets, credentials, and
 personal data. Drop dead-ends that didn't inform the final approach and any
 narrative chatter.
 
+**Confirm the workflow with the user before moving on.** Present the extracted
+steps as an ordered outline and ask whether it's correct and complete:
+
+- Are the steps right, in the right order?
+- Anything missing, redundant, or that should be removed?
+- Are the right details generalized vs. kept specific?
+
+Incorporate the user's feedback and re-present the revised outline. Repeat this
+loop until the user confirms the workflow is correct. Do not proceed to step 3
+until they approve.
+
 ### 3. Gather skill metadata
 
 Confirm with the user:
