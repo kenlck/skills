@@ -1,6 +1,7 @@
 ---
 name: session-to-skill
 description: Capture the workflow performed in the current session and turn it into a reusable skill. Use when the user wants to save, distill, or "skill-ify" what was just done so it can be repeated later — e.g. "turn this session into a skill", "make a skill out of this", "capture this workflow".
+disable-model-invocation: true
 ---
 
 # Session to Skill
@@ -25,7 +26,7 @@ out: the task accomplished and the ordered steps used to do it. If the session
 covered several unrelated tasks, ask the user which one to capture.
 
 State the workflow you intend to capture in 1-2 sentences and confirm with the
-user before drafting.
+user before extracting.
 
 ### 2. Extract the durable workflow from session specifics
 
@@ -63,7 +64,7 @@ Confirm with the user:
 - **Location** — which bundle or skills directory it belongs in.
 - **Triggers** — when the skill should activate (keywords, contexts, file types).
 
-### 4. Draft the skill
+### 4. Draft and write the skill
 
 Follow the conventions in [write-a-skill](../write-a-skill/SKILL.md): valid
 frontmatter (`name`, `description` with "Use when [triggers]"), SKILL.md under
@@ -73,19 +74,19 @@ Bundle a script only if the session repeated a deterministic command sequence
 worth saving as code. Split into reference files only if SKILL.md would exceed
 100 lines.
 
-### 5. Scaffold and write
+Create the skill folder at the chosen location and write the files.
 
-If working inside this repo, scaffold with `./skills.sh new <bundle> <name>`,
-then overwrite the generated `SKILL.md`. Otherwise create the skill folder
-directly and write the files.
+### 5. Review with user
 
-### 6. Review with user
+Present the draft and highlight: does it capture the workflow completely, are the
+generalized parameters right, is any step over-/under-explained? Then ask via
+AskUserQuestion: proceed (Recommended) / adjust / abort.
 
-Present the draft and ask:
+**Approval gate** — resolve the outcome before finishing:
 
-- Does this capture the workflow accurately and completely?
-- Are the generalized parameters right, or should anything stay specific?
-- Anything missing, or any step over-/under-explained?
-
-Iterate until approved. Optionally suggest running
-[review-skill](../review-skill/SKILL.md) to validate against the checklist.
+- *proceed* — the skill is done. Optionally suggest running
+  [review-skill](../review-skill/SKILL.md) to validate against the checklist.
+- *adjust* (or any request for changes) — revise the draft, re-present it in full,
+  and ask again. Repeat until the user **explicitly** approves. Stating *what* to
+  change is never permission to finish.
+- *abort* — stop here.
