@@ -43,15 +43,17 @@ personal data. Drop dead-ends that didn't inform the final approach and any
 narrative chatter.
 
 **Confirm the workflow with the user before moving on.** Present the extracted
-steps as an ordered outline and ask whether it's correct and complete:
+steps as an ordered outline (steps + order, what's generalized vs. kept
+specific), then ask via AskUserQuestion: proceed (Recommended) / adjust / abort.
 
-- Are the steps right, in the right order?
-- Anything missing, redundant, or that should be removed?
-- Are the right details generalized vs. kept specific?
+**Approval gate** — resolve the AskUserQuestion outcome before doing anything else:
 
-Incorporate the user's feedback and re-present the revised outline. Repeat this
-loop until the user confirms the workflow is correct. Do not proceed to step 3
-until they approve.
+- *proceed* — the only outcome that advances to step 3.
+- *adjust* (or any request for changes) — treat it as a request to revise, **not**
+  as approval. Revise the outline, re-present the full updated workflow, and ask
+  again (proceed / adjust / abort). Repeat until the user **explicitly** approves.
+  Stating *what* to change is never permission to advance.
+- *abort* — stop here. Offer to recapture a different workflow or end.
 
 ### 3. Gather skill metadata
 
