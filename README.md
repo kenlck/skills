@@ -45,6 +45,17 @@ Skill authoring toolkit — write, review, and improve Claude Code skills.
 | `enhance-skill` | Review a skill and apply improvements to structure and content quality |
 | `session-to-skill` | Capture the workflow of the current session and distill it into a reusable skill |
 
+### [mini](./mini/README.md)
+Mini-model optimized feature workflows with strict state files, exact approval gates, and split stage skills.
+
+| Skill | Description |
+|-------|-------------|
+| `feature-dev-mini` | Routes feature work through discovery, planning, implementation, and validation |
+| `feature-discovery` | Codebase-first discovery plus mandatory grill loop before planning |
+| `feature-planning` | Converts approved discovery into a scoped implementation plan |
+| `feature-implementation` | Executes the approved plan without redesigning or expanding scope |
+| `feature-validation` | Validates the completed implementation and records results |
+
 ## Installation
 
 ```sh
