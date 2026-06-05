@@ -1,83 +1,58 @@
-# Migration: feature-dev-next to mini
+# Design notes: feature-dev-next → mini
 
-## Revised Architecture
+## Why `feature-dev-next` fails on small models
 
-`feature-dev-next` is a monolithic staged workflow. `mini` splits the workflow into one orchestrator and four focused stage skills:
+`feature-dev-next` is a 130+ line monolith with 7 stages × 3 presets. Tested on
+GPT-5.4 Mini, it **skipped stages and jumped straight to coding** even when Deep
+was selected. Small models don't disobey — they *compress* a long document to
+its gist and run to the strongest attractor (write code). Every defense in
+`feature-dev-next` is the kind a small model compresses away: length, branchy
+presets, gates written as warnings, gates buried after context.
 
-```text
-feature-dev-mini
-  -> feature-discovery
-  -> feature-planning
-  -> feature-implementation
-  -> feature-validation
-```
+## First attempt (abandoned): a 5-skill state machine
 
-The orchestrator contains routing logic only. Stage instructions live only in child skills.
+The first `mini` rewrite split the flow into an orchestrator + four child skills
+(`feature-discovery`, `feature-planning`, `feature-implementation`,
+`feature-validation`) with `state.md` flags and skill-to-skill routing.
 
-## What Moves Where
+It made things **worse**, for two reasons:
 
-| `feature-dev-next` section | New location | Notes |
+1. **`disable-model-invocation: true` on the child skills broke routing** — the
+   orchestrator could not actually invoke them, so the chain dead-ended.
+2. **Indirection is the enemy of small models** — cross-skill hops, external
+   state maintenance, and conditional routing are exactly what weak models fail
+   at. Splitting added all three.
+
+## Current design: one skill + one hook
+
+`feature-dev-mini` is now a single, short, linear, turn-capped document. The
+techniques that actually raise small-model compliance:
+
+- **One path** — no presets, no branches to track.
+- **One action per numbered step**, one step per reply, explicit turn-capping.
+- **Visible gate markers** (`GRILLING`, `AWAITING APPROVAL: …`) instead of
+  internal decisions — a token the model must emit anchors the behavior.
+- **An inlined grill loop** (one question per reply, bounded to ~5) — the
+  interactive pattern that worked, made deterministic.
+- **The gate repeated at top and bottom** — recency and primacy both win.
+
+Because a prompt is only a suggestion, the bundle also ships a **`PreToolUse`
+hook** (`hooks/`) that denies file edits until the user creates `.agent-approved`.
+That is the only true enforcement; the skill makes the model *want* to comply,
+the hook makes non-compliance *impossible*.
+
+## What was dropped from `feature-dev-next`, on purpose
+
+| `feature-dev-next` feature | Status | Why |
 |---|---|---|
-| Stage 0 setup | `feature-dev-mini` | Reduced to slug/state setup and routing |
-| Presets | Removed | Single Deep-style path, no Quick/Standard/Deep branching |
-| Stage 1 discovery | `feature-discovery` | Codebase-first, mandatory grill loop, exact approval gate |
-| Stage 2 exploration | `feature-discovery` | Single-agent evidence checklist instead of Explorer subagents |
-| Stage 3 architecture | `feature-planning` | Single-agent plan with alternatives considered |
-| Stage 4 implementation | `feature-implementation` | Executes only approved plan |
-| Stage 5 quality | `feature-validation` | Reviewer subagents removed for determinism |
-| Stage 6 summary | `feature-validation` | Final state and validation summary |
-| `FRONTEND.md` | Not migrated | Frontend design is outside this workflow |
-| `LOG.md` | Replaced by state files | Per-feature state/artifacts are canonical |
-| `AGENTS.md` | Not migrated | Subagent fan-out is removed for mini compliance |
+| Quick/Standard/Deep presets | Removed | Branch-tracking loses small models |
+| Explorer/Architect/Reviewer subagent fan-out | Removed | Synthesis + indirection too heavy |
+| `AskUserQuestion`-based gates | Replaced with visible text markers | Not all harnesses provide the tool |
+| `FRONTEND.md` / `LOG.md` / `AGENTS.md` | Not carried over | Out of scope for the mini path |
 
-## Sections Causing Stage Skipping
+## Install
 
-- Presets create multiple paths and skipped stages.
-- Approval gates appear after long contextual guidance.
-- Architecture and implementation instructions live in the same file.
-- Subagent fan-out requires synthesis and increases state drift.
-- Discovery and exploration are separate stages, letting models treat discovery as optional.
-
-## State Passing
-
-Each feature writes durable state in the target project:
-
-```text
-plans/feature-dev-mini/<feature-slug>/state.md
-plans/feature-dev-mini/<feature-slug>/discovery.md
-plans/feature-dev-mini/<feature-slug>/plan.md
-plans/feature-dev-mini/<feature-slug>/validation.md
-```
-
-The orchestrator reads `state.md` first and routes by exact flags:
-
-- `Discovery Complete`
-- `Discovery Approved`
-- `Plan Complete`
-- `Plan Approved`
-- `Implementation Complete`
-- `Validation Complete`
-
-Only exact user messages count as approvals:
-
-- `APPROVE DISCOVERY`
-- `APPROVE PLAN`
-
-## Migration Plan
-
-1. Add `mini/` as a standalone top-level bundle.
-2. Install or link the bundle with `./skills.sh link mini`.
-3. Use `/mini:feature-dev-mini <feature request>` for new feature work.
-4. Keep `/ken-swe:feature-dev-next` available while testing the mini workflow.
-5. After repeated successful runs, decide whether to deprecate `feature-dev-next` or keep it for larger models.
-
-## Future Split Consideration
-
-The new bundle already uses separate stage skills. If mini models still skip routing, stop invoking the orchestrator and require users to call each child skill directly:
-
-```text
-/mini:feature-discovery
-/mini:feature-planning
-/mini:feature-implementation
-/mini:feature-validation
+```sh
+./skills.sh link mini
+# then install the hook into your project — see hooks/README.md
 ```
