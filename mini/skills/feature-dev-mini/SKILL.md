@@ -8,11 +8,13 @@ disable-model-invocation: true
 
 ## TOP RULE — read before anything else
 
-1. Do **ONE step per reply**. After each step, STOP and wait for the user.
-2. Do **NOT** call any file edit/create/write tool until the user has replied
-   `approve` **twice**: once after Discovery, once after the Plan.
-3. Before any file edit, re-check: *did the user approve Discovery AND the Plan?*
-   If not, stop and go back.
+1. **Begin every reply** with one line: `Current state: <STATE>` where `<STATE>`
+   is one of `DISCOVERY_SCAN | GRILLING | DISCOVERY_APPROVAL | PLAN | IMPLEMENT | VALIDATE`.
+2. Do **ONE step per reply**. After each step, STOP and wait for the user.
+3. Do **NOT** call any file edit/create/write tool until the user has sent both
+   `APPROVE DISCOVERY` (after Discovery) and `APPROVE PLAN` (after the Plan).
+4. Before any file edit, re-check: *did the user send `APPROVE DISCOVERY` AND
+   `APPROVE PLAN`?* If not, stop and go back.
 
 If file edits are blocked by an approval hook, that is expected — see
 [hooks/README.md](../../hooks/README.md). Tell the user to create the approval
@@ -22,11 +24,13 @@ marker once the Plan is approved.
 
 ## Step 1 — Discovery + Grill (no code, multiple replies)
 
-### 1a. Scan first (one reply)
+### 1a. Scan first (one reply) — `Current state: DISCOVERY_SCAN`
 Search the codebase: **≥5 searches, ≥5 file reads**. Output a short findings
-list with `path:line` bullets. Then begin grilling in your next reply.
+list with `path:line` bullets. Do NOT ask any question in this reply.
 
-### 1b. Grill loop (ONE question per reply)
+End the reply with exactly: `END OF SCAN — NEXT REPLY WILL BEGIN GRILLING`
+
+### 1b. Grill loop (ONE question per reply) — `Current state: GRILLING`
 Interview the user about every decision needed to build this, one branch of the
 decision tree at a time.
 
@@ -39,7 +43,7 @@ decision tree at a time.
 
 Continue until no blocking unknowns remain (usually ≤5 questions).
 
-### 1c. Finish discovery (one reply, only when grilling is done)
+### 1c. Finish discovery (one reply, only when grilling is done) — `Current state: DISCOVERY_APPROVAL`
 Output:
 - Feature in 2 lines
 - Confirmed decisions (from the grill)
@@ -50,7 +54,7 @@ End the reply with exactly: `AWAITING APPROVAL: DISCOVERY`
 
 ---
 
-## Step 2 — Plan (one reply, only after the user replies `approve`)
+## Step 2 — Plan (one reply, only after the user sends `APPROVE DISCOVERY`) — `Current state: PLAN`
 
 Output:
 - A numbered, file-by-file change list (each line: file + what changes)
@@ -62,11 +66,11 @@ End the reply with exactly: `AWAITING APPROVAL: PLAN`
 
 ---
 
-## Step 3 — Implement (only after the user replies `approve` a second time)
+## Step 3 — Implement (only after the user sends `APPROVE PLAN`) — `Current state: IMPLEMENT`
 
 First, output and tick this checklist:
-- [ ] Discovery approved
-- [ ] Plan approved
+- [ ] `APPROVE DISCOVERY` received
+- [ ] `APPROVE PLAN` received
 
 If the approval hook is installed, remind the user to create the approval marker
 now (see [hooks/README.md](../../hooks/README.md)) so edits are unblocked.
@@ -77,7 +81,7 @@ design.
 
 ---
 
-## Step 4 — Validate (one reply)
+## Step 4 — Validate (one reply) — `Current state: VALIDATE`
 
 Run the tests from the Step 2 test plan. Report:
 - Tests run and pass/fail
@@ -90,27 +94,36 @@ Run the tests from the Step 2 test plan. Report:
 
 ```
 User:  build a CSV export button on the reports page
-You:   [Step 1a — codebase findings] ... then a question:
+You:   Current state: DISCOVERY_SCAN
+       [codebase findings as path:line bullets — no questions]
+       END OF SCAN — NEXT REPLY WILL BEGIN GRILLING
+User:  go on
+You:   Current state: GRILLING
        Recommended: stream server-side — keeps memory flat for big reports.
        Should export run server-side or client-side?
        GRILLING
 User:  server-side
-You:   Recommended: reuse existing /reports/:id loader ...
-       One more: include filters in the export, or all rows?
+You:   Current state: GRILLING
+       Recommended: include filters — matches what the user sees on screen.
+       Include the active filters in the export, or all rows?
        GRILLING
 User:  include filters
-You:   [Step 1c — discovery summary]
+You:   Current state: DISCOVERY_APPROVAL
+       [discovery summary]
        AWAITING APPROVAL: DISCOVERY
-User:  approve
-You:   [Step 2 — file-by-file plan + test plan]
+User:  APPROVE DISCOVERY
+You:   Current state: PLAN
+       [file-by-file plan + test plan]
        AWAITING APPROVAL: PLAN
-User:  approve
-You:   [Step 3 — checklist ticked, then implement]
+User:  APPROVE PLAN
+You:   Current state: IMPLEMENT
+       [checklist ticked, then implement]
 ```
 
 ---
 
 ## BOTTOM RULE — repeated on purpose
 
-ONE step per reply. No file edits until the user has said `approve` twice. When
-in doubt, stop and ask.
+Start every reply with `Current state: …`. ONE step per reply. No file edits
+until the user has sent both `APPROVE DISCOVERY` and `APPROVE PLAN`. When in
+doubt, stop and ask.
