@@ -50,6 +50,33 @@ the hook makes non-compliance *impossible*.
 | `AskUserQuestion`-based gates | Replaced with visible text markers | Not all harnesses provide the tool |
 | `FRONTEND.md` / `LOG.md` / `AGENTS.md` | Not carried over | Out of scope for the mini path |
 
+## Second tightening (2026-06): templates + test-first
+
+Real runs of the single-skill version were **compliant but weak**: shallow
+scans, trivial grill questions, vague plans — and the grill question was often
+emitted twice in one reply, because the reply shape was described in prose the
+model had to assemble itself.
+
+The fixes, all inline and branch-free:
+
+- **Exact reply skeletons to copy** (scan findings, grill question, plan,
+  validate report) — a small model fills in a template far more reliably than
+  it follows assembly rules; this also killed the question-doubling.
+- **Recipe-driven scan** — five named searches (entry point, similar feature,
+  conventions, existing tests + the test command, integration seams) instead
+  of a bare "≥5 searches" quantity floor.
+- **Grill decision-area menu** — data model, edge cases, errors, permissions,
+  UX/API; at most one question per area, skip what the codebase answers.
+- **Plan/test 1:1 pairing** — change item N is proven by test N.
+- **Red-green per item in Step 3** — write test N, paste the FAIL line,
+  implement, paste the PASS line; stop after 2 failed attempts and return to
+  PLAN. Run-through (no stopping between green items) keeps turn count flat.
+- **Validate = full suite + static checks + plan-drift audit** — any changed
+  file not in the approved plan gets FLAGged.
+
+The state machine is unchanged (same six states, same two approvals, same
+hook); only the content of each state got prescriptive.
+
 ## Install
 
 ```sh

@@ -16,11 +16,12 @@ inlines everything into one short, linear, turn-capped document.
 
 | Skill | Description |
 |-------|-------------|
-| `feature-dev-mini` | Four gated steps — Discovery+Grill → Plan → Implement → Validate. One step per reply; no file edits until the user approves twice. |
+| `feature-dev-mini` | Four gated steps — Discovery+Grill → Plan → Test-first Implement → Validate. One step per reply; no file edits until the user approves twice; red-green per plan item. |
 
 The design principles (short, single-path, one-action steps, turn-capping,
-visible gate markers, an inlined grill loop, repeated top/bottom rules) are what
-keep a small model on rails. See `skills/feature-dev-mini/SKILL.md`.
+visible gate markers, exact reply skeletons to copy, an inlined grill loop,
+repeated top/bottom rules) are what keep a small model on rails. See
+`skills/feature-dev-mini/SKILL.md`.
 
 ## Hook (recommended)
 
@@ -42,6 +43,8 @@ Then install the hook into your project per [hooks/README.md](hooks/README.md).
 /feature-dev-mini add a CSV export button to the reports page
 ```
 
-The model runs discovery, grills you one question at a time, summarizes, and
-stops for `approve`. It plans, stops for `approve` again, then implements only
-the approved change list.
+The model runs a recipe-driven discovery scan, grills you one question at a
+time from a fixed decision-area menu, summarizes, and stops for approval. It
+plans (each change paired 1:1 with a test), stops for approval again, then
+implements test-first — red, then green, per plan item — and validates with the
+full suite plus a plan-drift audit.
