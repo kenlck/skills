@@ -1,0 +1,7 @@
+{
+  "name": "ken-loop",
+  "description": "Loop engineering: plan interactively, slice into machine-checkable issues, then drain the queue with headless one-issue-per-session agent runs that end in PRs",
+  "author": {
+    "name": "Ken"
+  }
+}
