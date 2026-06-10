@@ -17,7 +17,9 @@ Invoke the chosen skill if selected, then continue the feature workflow. Ask onl
 
 ## Design Direction (3 Questions)
 
-Before writing any frontend code, lock in the design direction. Ask these 3 questions using AskUserQuestion, then summarize and confirm before proceeding:
+**Scale this to the work.** The full 3-question interview applies to new pages/screens, visual redesigns, or anything establishing new visual language. For minor UI changes inside an existing design language (a new field on an existing form, a button, a list item variant), skip the interview entirely — match the surrounding styles and conventions instead.
+
+Before writing frontend code that establishes new visual language, lock in the design direction. Ask these 3 questions using AskUserQuestion, then summarize and confirm before proceeding:
 
 1. **Purpose & audience** — What problem does this UI solve, and who will use it? (e.g. power users who live in the app daily vs. casual visitors)
 2. **Tone & aesthetic** — Choose a direction: brutally minimal, editorial, refined, playful, brutalist, retro-futuristic, etc. Or describe how you want it to *feel*.

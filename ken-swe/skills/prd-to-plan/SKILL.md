@@ -57,7 +57,7 @@ Iterate until the user approves the breakdown.
 
 ### 6. Write the plan file
 
-Create `./plans/` if it doesn't exist. Write the plan as a Markdown file named after the feature (e.g. `./plans/user-onboarding.md`). Use the template below.
+Create `./plans/` if it doesn't exist. Write the plan as `./plans/<feature>-plan.md` (e.g. `./plans/user-onboarding-plan.md`) — the `-plan` suffix is what `feature-dev-next` Stage 0 scans for when resuming work. Use the template below.
 
 ```
 # Plan: <Feature Name>

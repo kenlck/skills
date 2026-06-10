@@ -12,9 +12,11 @@ Three-preset feature workflow: pick a preset, get only the stages you need. Quic
 
 `/ken-swe:feature-dev-next add a notifications panel`
 
-You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-log` in `$ARGUMENTS`. Everything else flows from that choice.
+You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-log` in `$ARGUMENTS`. Pass `--quick` / `--standard` / `--deep` to skip the preset question entirely. Everything else flows from that choice.
 
 **Interrupt protocol** — at any time, say `restart from stage X` to rewind to that stage with current state preserved.
+
+**Preset escalation** — if exploration or implementation reveals the task is meaningfully larger or riskier than the preset assumes (e.g. a Quick tweak turns out to touch schema or auth), pause and offer **one** upgrade (Quick → Standard, Standard → Deep) via AskUserQuestion. Never silently escalate, and never re-offer after a decline.
 
 ## Presets at a glance
 
@@ -24,7 +26,7 @@ You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-lo
 | Standard | focused | 2 Explorer agents| 2 Architect agents | inline TDD  | invoke `/review`         | off*        |
 | Deep     | grill   | 3 Explorer agents| 3 Architect agents | inline TDD or `/tdd` | 3 Reviewer agents | on          |
 
-\*Standard auto-flips to **on** if `plans/technical-decisions.md` or `plans/design-decisions.md` already exists for this feature area.
+\*Standard auto-flips to **on** if `plans/technical-decisions.md` or `plans/design-decisions.md` contains entries for this feature area (grep for the feature name — file existence alone is not enough, since the files are shared across all features).
 
 **Stage 0 (Setup)** and **Stage 6 (Summary)** always run for every preset — only Stages 1–5 vary by the table above.
 
@@ -41,14 +43,14 @@ You'll pick **one preset** and (optionally) flip log mode via `--log` / `--no-lo
 
 ## Stage 0: Setup
 
-1. Read `$ARGUMENTS`. Parse `--log` / `--no-log` flag if present.
+1. Read `$ARGUMENTS`. Parse `--log` / `--no-log` and `--quick` / `--standard` / `--deep` flags if present.
 2. **If `$ARGUMENTS` is empty (after stripping flags)** — scan `plans/` for an existing implementation plan (e.g. `<feature>-plan.md`). If found:
    - Read it; identify pending stages (not marked ✅ Done).
    - Ask via AskUserQuestion: work on the **next pending stage** (recommended) or **pick a specific stage**.
    - Use the chosen stage as feature scope; skip to its workflow point.
    - If no plan found, ask the user what they want to build.
 3. Detect existing `plans/technical-decisions.md` and `plans/design-decisions.md`. Note any decisions already resolved for this feature area — those won't be re-asked in Stage 1.
-4. Ask **one** AskUserQuestion: which preset (Quick / Standard / Deep)?
+4. If a preset flag was passed, use it and skip the question. Otherwise ask **one** AskUserQuestion: which preset (Quick / Standard / Deep)? Lead with a recommendation based on the task: Quick for localised tweaks within existing patterns, Standard for typical features, Deep for schema/auth/security-touching or novel-module work.
 5. Apply preset defaults:
    - **Log mode**: derived per preset table. `--log` / `--no-log` overrides.
    - **Memory check** (Standard/Deep only): if a `MEMORY.md` was auto-loaded into context, review it for prior work in this area (skip silently if absent). On Deep, if `claude-mem:mem-search` is in the available skills, also run it for richer cross-session lookup.
@@ -99,7 +101,7 @@ Every Stage 3 proposal — across all presets — **must list 3–5 verifiable g
 - *adjust* (or any request for changes) — treat it as a request to revise, **not** as approval to build. Revise the plan, then re-present the full updated plan (design + the 3–5 verifiable goals) and ask again (proceed / adjust / abort). Repeat until the user **explicitly** approves. Stating *what* to change is never permission to start implementing.
 - *abort* — stop here. Do not implement. Offer to return to Stage 1 (rework requirements) or end the workflow.
 
-If log mode is on, record the architecture decision and verifiable goals to the log.
+If log mode is on, once approved: record the architecture decision and verifiable goals to the log, **and** write `plans/<feature>-plan.md` — the chosen approach, the verifiable goals, and a stage checklist (Stage 4 / Stage 5 / Stage 6, each unmarked). This is the file Stage 0 uses to resume an interrupted feature; mark stages ✅ Done as they complete.
 
 ## Stage 4: Implementation
 
@@ -112,6 +114,7 @@ If log mode is on, record the architecture decision and verifiable goals to the 
 5. **Frontend work** — if the feature includes meaningful UI (pages, components, layouts, forms, visual changes), follow [FRONTEND.md](FRONTEND.md). If the `frontend-design` handoff was already offered in an earlier stage, honour that choice and do not re-ask — only re-offer if new UI scope has appeared since. Otherwise ask once whether to invoke `frontend-design` or proceed inline. If log mode is on, record design decisions to the log.
 6. **TDD on Deep (optional)** — at the start of Stage 4, ask once: "Use `/tdd` for full red-green-refactor on this implementation? (Recommended for risky/algorithmic work)". If yes, hand off; otherwise inline TDD-lite continues.
 7. **If a stubborn bug surfaces mid-implementation** — hand off to `/ken-swe:diagnose` rather than trying to debug inline. The diagnose skill enforces a feedback-loop discipline that catches bugs faster than ad-hoc inspection.
+8. **Exit gate** — before declaring Stage 4 done, run the project's full verification (test suite, typecheck, lint — whatever the repo provides). Per-sub-task greens are not enough; the whole suite must pass. If it fails, fix before advancing.
 
 ## Stage 5: Code Quality
 
@@ -127,6 +130,7 @@ If log mode is on, record the architecture decision and verifiable goals to the 
 ## Stage 6: Summary
 
 1. Mark all todos complete.
-2. Summarise: what was built, key decisions, files modified/created, frontend choices, suggested next steps.
-3. **Codemap nudge** — if Stage 2 fell back to Glob/Grep because `.codemap/` was missing, add one line: *"Tip: codemap would speed up future exploration in this repo — run `/ken-swe:ts-codemap` (TS/JS) or `/ken-swe:codemap` (Java/Go/Python/Rust)."*
-4. If log mode is on, finalise the log file with a summary section.
+2. **Goal scorecard** — list each verifiable goal from Stage 3 with its outcome (✅ passing / ❌ failing / ⏭ deferred) and one line of evidence (test name, command output). A goal that was never verified is reported as such, not assumed passing.
+3. Summarise: what was built, key decisions, files modified/created, frontend choices, suggested next steps.
+4. **Codemap nudge** — if Stage 2 fell back to Glob/Grep because `.codemap/` was missing, add one line: *"Tip: codemap would speed up future exploration in this repo — run `/ken-swe:ts-codemap` (TS/JS) or `/ken-swe:codemap` (Java/Go/Python/Rust)."*
+5. If log mode is on, finalise the log file with a summary section and mark all stages ✅ Done in `plans/<feature>-plan.md`.
