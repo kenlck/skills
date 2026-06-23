@@ -23,7 +23,9 @@ Capture for each item: ID (if any), title, description, and the acceptance crite
 
 Grilling and codebase grounding are one interleaved gate, not two phases. Grill the user relentlessly _and_ read the actual code, letting each feed the other: what the code says reshapes what you ask ("you said this writes to `orders` — but `orders` is event-sourced, no direct writes; do you mean emit an event?"), and what the user says tells you where to read next. Work one thread at a time; follow each answer to its next unknown before moving on.
 
-**Grounding mechanism** At the start, dispatch a recon agent (e.g. `Explore`) to map the technical surface — modules, services, contracts, and integration points the story touches — keeping the raw file dumps out of the grilling context. If no such agent type is available, read the code directly. Then, _during_ grilling, do targeted inline reads (single files, specific functions) whenever a thread needs exact code to resolve.
+**Start with the requirement, not the code.** Open by grilling the user on what the story actually means — restate each acceptance criterion, surface the ambiguities, edge cases, and scope. Do **not** read code until a specific thread needs a specific fact to resolve.
+
+**Grounding is demand-driven.** Read code only when a live grilling thread can't be settled without it, and read only what that thread needs (a single file, a specific function), not the surrounding area "for context." Each read should be answering a question you can name. If — and only if — a thread has fanned out into several files at once and the raw dumps would clog the grilling, dispatch a scoped recon agent (e.g. `Explore`) for _that thread_ with a precise question, so the file contents stay out of context. Never open with a broad "map the whole technical surface" sweep; the surface that matters reveals itself one resolved thread at a time.
 
 Grill — and ground — across these dimensions:
 
