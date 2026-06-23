@@ -17,6 +17,7 @@ Software engineering lifecycle — feature development, bug fixing, PRD writing,
 | `grill-me-standards` | Planning | Interview the user to extract coding standards grounded in what the codebase already does |
 | `write-a-prd` | Planning | Write a PRD with embedded design direction |
 | `prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices |
+| `prepare-implementation-plan` | Planning | Turn user stories and acceptance criteria into a verifiable, code-grounded implementation plan |
 | `feature-dev` | Implementation | Staged feature development: requirements → exploration → architecture → implementation → review |
 | `feature-dev-next` | Implementation | Right-sized feature development with three presets (Quick / Standard / Deep) and hard approval gates |
 | `feature-dev-auto` | Implementation | Autonomous goal-loop variant: front-load decisions, then implement unattended against verifiable goals |

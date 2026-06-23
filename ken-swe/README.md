@@ -14,6 +14,7 @@ Ken's software engineering skill suite. Covers the full development lifecycle �
 | `grill-me-standards` | `/ken-swe:grill-me-standards` | Planning | Interview the user to extract coding standards and project context, grounded in what the codebase already does |
 | `write-a-prd` | `/ken-swe:write-a-prd` | Planning | Write a PRD with embedded design direction through codebase exploration and user interview |
 | `prd-to-plan` | `/ken-swe:prd-to-plan` | Planning | Break a PRD into phased tracer-bullet vertical slices, saved as a plan file |
+| `prepare-implementation-plan` | `/ken-swe:prepare-implementation-plan` | Planning | Turn user stories and acceptance criteria into a verifiable, code-grounded implementation plan |
 | `feature-dev` | `/ken-swe:feature-dev` | Implementation | Staged feature development: requirements → codebase exploration → architecture → implementation → review |
 | `feature-dev-next` | `/ken-swe:feature-dev-next` | Implementation | Right-sized feature development with three presets (Quick / Standard / Deep). Testbed for the next iteration of `feature-dev` |
 | `feature-dev-auto` | `/ken-swe:feature-dev-auto` | Implementation | Autonomous goal-loop variant: front-load decisions interactively, then implement unattended against verifiable goals |
