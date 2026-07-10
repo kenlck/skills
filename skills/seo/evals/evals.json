@@ -1,0 +1,49 @@
+{
+  "skill_name": "seo",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/seo — repo is a Next.js App Router marketing site, package.json homepage is https://example.com",
+      "expected_output": "Reads/creates SEO.md, detects Next.js App Router and per-route rendering, builds a route inventory, runs codebase checks AND live curl checks against https://example.com (raw HTML, robots.txt, sitemap.xml, llms.txt, redirect variants, soft-404, TTFB). Every rubric check gets a status with evidence or n/a with a reason. Writes SEO.md (preserving any Notes section) and a dated seo-reports/ file with seven category scores, SEO + GEO headline scores with grades, findings tables with evidence, and a tiered plan naming exact files. Chat shows scores, scorecard, top 5 actions, then offers quick wins without applying them.",
+      "assertions": [
+        "Detects framework and rendering strategy before auditing",
+        "Runs live checks with curl since a deployed URL exists",
+        "Never assigns pass/fail without recorded evidence",
+        "Distinguishes client-injected meta/JSON-LD from server-rendered (S5/R1 caveat)",
+        "SEO.md updated in place with score history appended and Notes preserved",
+        "Report written to seo-reports/seo-report-YYYY-MM-DD.md",
+        "Scores follow rubric weights exactly; grades match bands",
+        "GEO checks covered: AI-crawler robots policy, llms.txt, answer-first structure",
+        "Plan items name exact files and rubric points recovered",
+        "No source files modified without explicit user acceptance"
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "/seo — repo is a Vite + React SPA with no deployed URL configured, user replies 'no URL yet' when asked",
+      "expected_output": "Asks for the URL once, proceeds codebase-only. Flags CSR as the dominant finding: meta and content never reach raw HTML, so R1 fails and this caps both scores — the plan leads with prerendering/SSR migration. All live-only checks (C6, C7, P8, S5 live half) marked n/a with 'no deployed URL'. Categories renormalize over applicable checks. Both artifacts still produced.",
+      "assertions": [
+        "Asks for deployed URL exactly once, then proceeds without it",
+        "Live-only checks marked n/a with reason, not failed",
+        "Category scores renormalized over applicable checks",
+        "CSR identified as the top structural finding with SSR/prerender in the plan",
+        "SEO.md and dated report still produced"
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "/seo structured data only — second run on a repo that already has SEO.md with a Notes section and one prior report",
+      "expected_output": "Restricts audit to the Structured Data category (plus Step 1 context), states skipped categories in the report, reuses deployed URL and keywords from SEO.md without re-asking, preserves the Notes section verbatim, appends to score history, and shows deltas against the prior report for the audited category.",
+      "assertions": [
+        "Focus argument restricts categories and report says which were skipped",
+        "Deployed URL and keywords reused from SEO.md without re-asking",
+        "Notes section preserved verbatim",
+        "Score history appended, not rewritten",
+        "Deltas computed against the previous report"
+      ],
+      "files": []
+    }
+  ]
+}
