@@ -39,6 +39,7 @@ These live in [`./skills`](./skills) and are not currently managed by `skills.sh
 | `to-prd` | Turn the current conversation into a PRD and publish it to the issue tracker |
 | `to-issues` | Break a plan or PRD into independently grabbable vertical-slice issues |
 | `seo` | Codebase-driven SEO + GEO audit: SEO.md fact sheet, scored report, prioritized improvement plan |
+| `seo-strategy` | Research and maintain an evidence-backed SEO/GEO thesis and execution-ready roadmap |
 | `seo-audit` | Audit a site for technical and on-page SEO issues |
 | `handoff` | Compact the current conversation into a handoff document for another agent |
 
