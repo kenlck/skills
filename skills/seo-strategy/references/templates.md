@@ -12,6 +12,8 @@ seo-strategy/
 
 Use `YYYY-MM-DD-short-slug.md`; add a numeric suffix when the name already exists. Research and history files are immutable. Preserve `## Notes (manually maintained)` in `SEO-STRATEGY.md` verbatim.
 
+Preserve `Tracker issue` when refreshing the same strategy. Set it to `not published` for a new or materially replaced strategy; `/to-seo-issues` replaces that value after publishing the approved thesis issue.
+
 ## Current strategy
 
 ```markdown
@@ -22,6 +24,7 @@ Use `YYYY-MM-DD-short-slug.md`; add a numeric suffix when the name already exist
 - Last reviewed: YYYY-MM-DD
 - Next review: YYYY-MM-DD
 - Market / language: <primary market> / <language>
+- Tracker issue: <reference> | not published
 - Research: [<label>](seo-strategy/research/<file>.md)
 - Previous strategy: [<label>](seo-strategy/history/<file>.md) | none
 
