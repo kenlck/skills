@@ -7,9 +7,9 @@ Use tracker-native parent and dependency relationships when available; otherwise
 Show thesis creation or reuse, missing-label creation, reconciliation and supersession changes, then a numbered package list. For each package show:
 
 - title and archetype;
-- parent and hard blockers;
+- parent and hard blockers (published as native blocking relationships);
 - parallel external bets and fallback;
-- proposed labels and why it is or is not ready;
+- proposed labels, and the failed definition condition when readiness is withheld;
 - delivery evidence or review decision;
 - deferred or screened-out roadmap work.
 
@@ -114,7 +114,7 @@ Apply `seo-strategy`, never `ready-for-seo-agent`. Reuse a matching issue instea
 - Fallback:
 ```
 
-Apply `ready-for-seo-agent` only when the readiness contract passes.
+Apply `ready-for-seo-agent` when the labeling contract passes, even while hard prerequisites are still open — record those prerequisites as tracker-native blocking relationships instead of withholding the label.
 
 ## Outcome review
 
@@ -160,7 +160,7 @@ Apply `ready-for-seo-agent` only when the readiness contract passes.
 - [ ] Follow-up packages or strategy-review trigger identified
 ```
 
-Always apply `seo-outcome-review`. Add `ready-for-seo-agent` only after delivery prerequisites and the observation window are complete.
+Always apply `seo-outcome-review`. Record delivery inputs as native blocking relationships, and add `ready-for-seo-agent` only after the observation window has elapsed — the window is a time gate the dependency graph cannot express.
 
 ## Engineering handoff
 

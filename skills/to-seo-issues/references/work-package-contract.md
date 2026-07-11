@@ -32,18 +32,21 @@ Quality assurance belongs inside delivery acceptance unless a different owner, a
 
 Every external bet names the controllable deliverable, the uncontrolled result, a deadline or review point, a no-response or no-budget fallback, and the measurement assumption that changes if it fails. External or paid work may be a hard prerequisite only when no valid downstream deliverable exists without it. Failure of a genuinely essential external prerequisite triggers an initiative or strategy review instead of an indefinite blocked chain.
 
-## Readiness
+## Readiness and labeling
 
-Apply `ready-for-seo-agent` only when all of these are true:
+`ready-for-seo-agent` marks a package whose definition is complete enough for the SEO executor to run without new decisions. Apply it when all of these are true:
 
 - one primary archetype and bounded deliverable;
-- every hard prerequisite is complete;
-- required inputs, access, authority, and approvals are present;
+- required inputs, access, authority, and approvals are present, or are the recorded output of an upstream package in this graph;
 - delivery acceptance is observable and within the executor's control;
 - no human or engineering coordination is hidden inside the package;
 - for an outcome review, the observation window has elapsed.
 
-Remove or withhold the label when any condition fails. Never use delayed rankings, traffic, citations, replies, or conversions as delivery acceptance.
+**Open hard prerequisites never withhold or remove the label.** Record every hard prerequisite as a tracker-native blocking relationship (or an explicit `Blocked by` body reference when native dependencies are unavailable). Dependency state lives in the dependency graph; the executor skips packages with open blockers at claim time and stops when a named package is blocked.
+
+Remove or withhold the label only when a definition condition fails: missing authority no package in the graph produces, hidden human or engineering coordination, an unbounded deliverable, or an unelapsed review window. Never use delayed rankings, traffic, citations, replies, or conversions as delivery acceptance.
+
+At execution time the executor additionally requires the issue to be open, unclaimed, and free of open blocking issues before claiming.
 
 ## Required labels
 
@@ -51,7 +54,7 @@ Create a missing label only when its creation was included in the approved mutat
 
 | Label | Meaning |
 |---|---|
-| `ready-for-seo-agent` | The package passes every readiness condition and can be executed now by the SEO issue executor. |
+| `ready-for-seo-agent` | The package definition passes the labeling contract. Open blockers are allowed; the SEO issue executor checks the dependency graph at claim time. |
 | `seo-outcome-review` | The issue evaluates delayed evidence and records a continue, adjust, or stop decision. It may not be ready yet. |
 | `seo-strategy` | The issue is the durable tracker snapshot and parent for one approved strategy thesis. It is not executable. |
 | `seo-engineering-handoff` | The issue must be decomposed through the displayed `/to-issues` command. It is not executable by the SEO issue executor. |
