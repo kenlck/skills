@@ -12,7 +12,7 @@ Inspect, when present:
 - routes, content, metadata sources, and site configuration
 - configured deployed URL and the live site
 
-Infer the business model, valuable conversion, audience, market, and language from evidence. Present material inferences plainly. Ask only when ambiguity would change the research direction. An audit report is evidence, not a prerequisite; recommend `/seo` as a roadmap dependency only when a technical unknown could invalidate the thesis.
+Infer the business model, valuable conversion, audience, market, and language from evidence. Present material inferences plainly; the frame check in the skill is where the user confirms or corrects them. An audit report is evidence, not a prerequisite; recommend `/seo` as a roadmap dependency only when a technical unknown could invalidate the thesis.
 
 ## Research frontier by branch
 

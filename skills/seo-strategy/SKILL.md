@@ -19,7 +19,7 @@ The skill may read an existing `SEO.md` or `seo-reports/`, but an audit is optio
 - **Compare** — test named alternatives and add one evidence-backed challenger when appropriate.
 - **Refresh** — test the active thesis against results, changed conditions, and eligible proposals.
 
-On a bare invocation, use Refresh when `SEO-STRATEGY.md` has an active strategy; otherwise use Discover. Infer context before asking. Ask one focused question only when a missing fact would materially change the research; accept `unknown` and disclose a safe assumption when possible.
+On a bare invocation, use Refresh when `SEO-STRATEGY.md` has an active strategy; otherwise use Discover. Infer context before asking; accept `unknown` and disclose a safe assumption when the user cannot supply a fact.
 
 For Capture, write a `Captured` proposal using [references/templates.md](references/templates.md). Do not perform live research, form a thesis, or alter the active strategy.
 
@@ -27,7 +27,9 @@ For Capture, write a `Captured` proposal using [references/templates.md](referen
 
 Read the current strategy artifacts, relevant repository files, and live site when known. Establish the branch, business outcome, valuable conversion, audience, primary market, language, and decision being made. Treat user-supplied capacity as optional.
 
-**Complete when:** every field is known, inferred and disclosed, or explicitly `unknown`.
+The outcome, conversion, and audience are the user's facts, not the agent's. Present the inferred frame — what was found, what was assumed, what stayed `unknown` — and have the user confirm or correct it before research is spent on it. When the user is unavailable, proceed on the disclosed frame and keep the eventual thesis `Proposed`.
+
+**Complete when:** the user has confirmed or corrected the frame, or an unattended run has disclosed every assumption in it.
 
 ## 2. Build the evidence base
 
@@ -41,11 +43,13 @@ Apply [references/opportunity-framework.md](references/opportunity-framework.md)
 
 **Complete when:** the portfolio exposes the meaningful trade-offs and no plausible direction has disappeared without a reason.
 
-## 4. Propose the thesis
+## 4. Choose the bets with the user
 
-Choose one primary and one secondary bet. State why they beat the alternatives, with separate SEO and GEO rationales, risks, dependencies, and a lightweight measurement contract for each.
+Present the portfolio's leading options and the trade-offs between them, name a recommended primary and secondary bet, and get the user's steer before writing the thesis: appetite, capacity, and plans are their call, and the evidence cannot see them. When the user is unavailable, record the recommendation as the steer and keep the thesis `Proposed`.
 
-**Complete when:** the recommendation connects the business outcome to the evidence, bets, and continue/adjust/stop rules.
+Then state why the chosen bets beat the alternatives, with separate SEO and GEO rationales, risks, dependencies, and a lightweight measurement contract for each.
+
+**Complete when:** the user has steered the choice (or an unattended run recorded the default), and the recommendation connects the business outcome to the evidence, bets, and continue/adjust/stop rules.
 
 ## 5. Get the decision
 
